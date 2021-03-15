@@ -1,9 +1,9 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-
 const stuffRoutes = require('./routes/stuff')
 const userRoutes = require('./routes/user');
+const path = require('path')
 
 const app = express();
 // connection a mongodb atlas via mongoose
@@ -24,6 +24,7 @@ app.use((req, res, next) => {
 // transforme le corps de la requete en objet js 
 app.use(bodyParser.json());
 
+app.use('/images', express.static(path.join(__dirname, 'images')));
 app.use('/api/stuff', stuffRoutes);
 app.use('/api/auth', userRoutes);
 
